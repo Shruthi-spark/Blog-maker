@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Drag and Drop Blog</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+<h1>Drag and Drop Blog</h1>
+<div id="editor">
+<p>This is where you can add your blog post content.</p>
+<input type="text" placeholder="Title">
+<textarea></textarea>
+</div>
+<div id="preview">
+<p>This is a preview of your blog post content.</p>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+#container {
+  width: 500px;
+  margin: 0 auto;
+}
+
+#editor {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+#preview {
+  border: 1px solid black;
+  padding: 10px;
+  margin-top: 10px;
+}
+var editor = document.getElementById("editor");
+var preview = document.getElementById("preview");
+
+function onDragEnter(event) {
+  event.preventDefault();
+  event.target.style.border = "2px dashed blue";
+}
+
+function onDragLeave(event) {
+  event.preventDefault();
+  event.target.style.border = "1px solid black";
+}
+
+function onDrop(event) {
+  event.preventDefault();
+  var draggedElement = event.target;
+  var text = draggedElement.textContent;
+  preview.innerHTML += text;
+}
+
+editor.addEventListener("dragover", onDragEnter);
+editor.addEventListener("dragleave", onDragLeave);
+editor.addEventListener("drop", onDrop);
